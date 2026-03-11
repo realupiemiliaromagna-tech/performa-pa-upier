@@ -978,7 +978,7 @@ async function submitForm() {
       action: 'register',
       nome, cognome, email, cf: cf.toUpperCase(), ente,
       ore_totali: total,
-      lezioni: lezioniSel.map(({key, ...rest}) => rest)
+      lezioni: lezioniSel  // include 'key' per aggiornare i contatori su Sheets
     };
 
     // Invia i dati tramite JSONP (unico metodo cross-origin senza preflight)
