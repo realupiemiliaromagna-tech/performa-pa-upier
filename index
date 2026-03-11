@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iscrizione – PerForma PA</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #3d3d5c;
+    --sage: #5c7a6e;
+    --sage-light: #d4e5de;
+    --sage-pale: #eef5f2;
+    --gold: #b8975a;
+    --gold-light: #f5edd9;
+    --error: #c0392b;
+    --error-light: #fdecea;
+    --bg: #f7f6f2;
+    --white: #ffffff;
+    --border: #d8d4c8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--white);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(184,151,90,0.12);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 100px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(92,122,110,0.15);
+  }
+  .header-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(184,151,90,0.4);
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .header-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    max-width: 520px;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* SECTION BLOCK */
+  .section-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.2s;
+  }
+  .section-block:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .num {
+    width: 26px; height: 26px;
+    background: var(--ink);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    padding-left: 36px;
+  }
+
+  /* FORM FIELDS */
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .field-row.full { grid-template-columns: 1fr; }
+  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  label span.req { color: var(--gold); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"] {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    width: 100%;
+  }
+  input:focus {
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(92,122,110,0.12);
+  }
+  input.invalid { border-color: var(--error); }
+  .field-error {
+    font-size: 12px;
+    color: var(--error);
+    display: none;
+  }
+  .field-error.show { display: block; }
+
+  /* LEZIONE OBBLIGATORIA */
+  .mandatory-lesson {
+    background: var(--sage-pale);
+    border: 1px solid var(--sage-light);
+    border-radius: 6px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .mandatory-lesson .ml-info { flex: 1; }
+  .mandatory-lesson .ml-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .mandatory-lesson .ml-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .mandatory-lesson .ml-detail {
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .mandatory-lesson .ml-badge {
+    background: var(--sage);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* PACCHETTO */
+  .pacchetto {
+    margin-bottom: 20px;
+  }
+  .pacchetto-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pacchetto-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .p1 .pacchetto-dot { background: #5c7a6e; }
+  .p2 .pacchetto-dot { background: #7a6e8a; }
+  .p3 .pacchetto-dot { background: #8a6e5c; }
+  .p4 .pacchetto-dot { background: #5c6e8a; }
+
+  .pacchetto-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .pacchetto-req {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--ink-soft);
+    font-weight: 400;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .pacchetto-req.ok {
+    background: var(--sage-pale);
+    border-color: var(--sage-light);
+    color: var(--sage);
+  }
+
+  /* LEZIONE CHECKBOX */
+  .lezione-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .lezione-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    user-select: none;
+  }
+  .lezione-item:hover { background: var(--bg); border-color: #bbb; }
+  .lezione-item.selected {
+    background: var(--sage-pale);
+    border-color: var(--sage);
+  }
+  .lezione-item input[type="checkbox"] { display: none; }
+
+  .check-box {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    background: white;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .lezione-item.selected .check-box {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+  .check-box::after {
+    content: '';
+    width: 5px; height: 9px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(45deg) translateY(-1px);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .lezione-item.selected .check-box::after { opacity: 1; }
+
+  .lezione-info { flex: 1; }
+  .lezione-data {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-bottom: 1px;
+  }
+  .lezione-titolo {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .lezione-docente {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 1px;
+  }
+  .lezione-ore {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sage);
+    white-space: nowrap;
+  }
+
+  /* ORE COUNTER */
+  .ore-counter {
+    background: var(--ink);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ore-main {
+    flex: 1;
+  }
+  .ore-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 2px;
+  }
+  .ore-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+    transition: color 0.3s;
+  }
+  .ore-number.ok { color: #7ecfa0; }
+  .ore-number.over { color: var(--gold); }
+
+  .ore-progress-wrap { flex: 2; min-width: 180px; }
+  .ore-progress-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 6px;
+  }
+  .ore-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .ore-fill {
+    height: 100%;
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
+    transition: width 0.4s ease, background 0.3s;
+    max-width: 100%;
+  }
+  .ore-fill.ok { background: #7ecfa0; }
+  .ore-fill.over { background: var(--gold); }
+
+  .ore-breakdown {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .ore-chunk {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .ore-chunk .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .p1-dot { background: #5c7a6e; }
+  .p2-dot { background: #7a6e8a; }
+  .p3-dot { background: #8a6e5c; }
+  .p4-dot { background: #5c6e8a; }
+
+  /* VALIDAZIONE MESSAGGI */
+  .validation-messages {
+    display: none;
+    margin-bottom: 20px;
+  }
+  .validation-messages.show { display: block; }
+  .val-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .val-item.error { background: var(--error-light); color: var(--error); }
+  .val-item.success { background: var(--sage-pale); color: var(--sage); }
+  .val-icon { font-size: 16px; }
+
+  /* SUBMIT */
+  .submit-area {
+    text-align: center;
+    padding-top: 8px;
+  }
+  .btn-submit {
+    background: var(--ink);
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-submit:hover { background: #2d2d4a; transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { background: #aaa; cursor: not-allowed; transform: none; }
+  .submit-note {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+  }
+
+  /* SUCCESS STATE */
+  .success-overlay {
+    display: none;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 48px 32px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .success-overlay.show { display: block; }
+  .success-icon { font-size: 48px; margin-bottom: 16px; }
+  .success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .success-msg { color: var(--ink-soft); font-size: 14px; }
+
+  /* POSTI DISPONIBILI */
+  .lezione-item.full {
+    opacity: 0.55;
+    cursor: not-allowed;
+    background: #f5f4f0;
+  }
+  .lezione-item.full .check-box {
+    background: #e0ddd6;
+    border-color: #c8c5bc;
+  }
+  .seats-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .seats-ok { background: var(--sage-pale); color: var(--sage); }
+  .seats-low { background: #fff3e0; color: #e65100; }
+  .seats-full { background: #fdecea; color: var(--error); }
+
+  /* LOADING OVERLAY */
+  .loading-bar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage), var(--gold));
+    transform-origin: left;
+    animation: loading 1.5s ease-in-out infinite;
+    display: none;
+    z-index: 100;
+  }
+  .loading-bar.show { display: block; }
+  @keyframes loading {
+    0% { transform: scaleX(0); }
+    50% { transform: scaleX(0.7); }
+    100% { transform: scaleX(1); opacity: 0; }
+  }
+  .loading-notice {
+    background: var(--ink);
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+  }
+  .loading-notice.hide { display: none; }
+</style>
+</head>
+<body>
+
+<div class="loading-bar" id="loading-bar"></div>
+<div class="loading-notice" id="loading-notice">⏳ Caricamento disponibilità lezioni in corso…</div>
+
+<header>
+  <div class="header-inner">
+    <div class="header-tag">PerForma PA · 2026</div>
+    <h1>Iscrizione al percorso formativo</h1>
+    <p class="header-subtitle">Componi il tuo modulo scegliendo liberamente le lezioni. Seleziona almeno 1 lezione per ciascuno dei 4 pacchetti tematici, per un totale di almeno 24 ore.</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- DATI PERSONALI -->
+  <div class="section-block">
+    <div class="section-title"><span class="num">1</span> Dati personali</div>
+    <p class="section-desc">I dati inseriti saranno utilizzati esclusivamente per la gestione dell'iscrizione.</p>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Nome <span class="req">*</span></label>
+        <input type="text" id="nome" placeholder="Mario">
+        <span class="field-error" id="err-nome">Inserisci il nome</span>
+      </div>
+      <div class="field">
+        <label>Cognome <span class="req">*</span></label>
+        <input type="text" id="cognome" placeholder="Rossi">
+        <span class="field-error" id="err-cognome">Inserisci il cognome</span>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" id="email" placeholder="mario.rossi@comune.it">
+        <span class="field-error" id="err-email">Inserisci un'email valida</span>
+      </div>
+      <div class="field">
+        <label>Codice Fiscale <span class="req">*</span></label>
+        <input type="text" id="cf" placeholder="RSSMRA80A01H501Z" maxlength="16" style="text-transform:uppercase">
+        <span class="field-error" id="err-cf">Inserisci un codice fiscale valido (16 caratteri)</span>
+      </div>
+    </div>
+    <div class="field-row full">
+      <div class="field">
+        <label>Ente di appartenenza <span class="req">*</span></label>
+        <input type="text" id="ente" placeholder="Es. Comune di Bologna">
+        <span class="field-error" id="err-ente">Inserisci l'ente di appartenenza</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORE COUNTER -->
+  <div class="ore-counter">
+    <div class="ore-main">
+      <div class="ore-label">Ore selezionate</div>
+      <div class="ore-number" id="ore-display">0</div>
+    </div>
+    <div class="ore-progress-wrap">
+      <div class="ore-progress-label">Minimo richiesto: <strong>24 ore</strong></div>
+      <div class="ore-bar"><div class="ore-fill" id="ore-fill" style="width:0%"></div></div>
+      <div class="ore-breakdown">
+        <div class="ore-chunk"><span class="dot p1-dot"></span><span id="b-p1">M2: 0h</span></div>
+        <div class="ore-chunk"><span class="dot p2-dot"></span><span id="b-p2">M3: 0h</span></div>
+        <div class="ore-chunk"><span class="dot p3-dot"></span><span id="b-p3">M4: 0h</span></div>
+        <div class="ore-chunk"><span class="dot p4-dot"></span><span id="b-p4">M5: 0h</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCELTA LEZIONI -->
+  <div class="section-block">
+    <div class="section-title"><span class="num">2</span> Composizione del modulo formativo</div>
+    <p class="section-desc">Seleziona almeno 1 lezione per ciascun pacchetto tematico, per un totale di almeno 24 ore.</p>
+
+    <!-- PACCHETTO 1 -->
+    <div class="pacchetto p0" style="margin-bottom:20px;">
+      <div class="pacchetto-header">
+        <div class="pacchetto-dot" style="background:#4a6fa5;"></div>
+        <div class="pacchetto-name">M1 – Condivisione degli obiettivi</div>
+        <div class="pacchetto-req" id="req-p0">Opzionale</div>
+      </div>
+      <div class="lezione-list" id="list-p0"></div>
+    </div>
+
+    <!-- PACCHETTO 2 -->
+    <div class="pacchetto p1">
+      <div class="pacchetto-header">
+        <div class="pacchetto-dot"></div>
+        <div class="pacchetto-name">M2 – Mindfulness e benessere</div>
+        <div class="pacchetto-req" id="req-p1">Min. 1 lezione</div>
+      </div>
+      <div class="lezione-list" id="list-p1"></div>
+    </div>
+
+    <!-- PACCHETTO 3 -->
+    <div class="pacchetto p2">
+      <div class="pacchetto-header">
+        <div class="pacchetto-dot"></div>
+        <div class="pacchetto-name">M3 – Sviluppo delle capacità attentive</div>
+        <div class="pacchetto-req" id="req-p2">Min. 1 lezione</div>
+      </div>
+      <div class="lezione-list" id="list-p2"></div>
+    </div>
+
+    <!-- PACCHETTO 4 -->
+    <div class="pacchetto p3">
+      <div class="pacchetto-header">
+        <div class="pacchetto-dot"></div>
+        <div class="pacchetto-name">M4 – Riduzione dello stress amministrativo</div>
+        <div class="pacchetto-req" id="req-p3">Min. 1 lezione</div>
+      </div>
+      <div class="lezione-list" id="list-p3"></div>
+    </div>
+
+    <!-- PACCHETTO 5 -->
+    <div class="pacchetto p4">
+      <div class="pacchetto-header">
+        <div class="pacchetto-dot"></div>
+        <div class="pacchetto-name">M5 – Miglioramento del clima organizzativo</div>
+        <div class="pacchetto-req" id="req-p4">Min. 1 lezione</div>
+      </div>
+      <div class="lezione-list" id="list-p4"></div>
+    </div>
+
+    <!-- PACCHETTO 6 -->
+    <div class="pacchetto p5" style="margin-top:20px;">
+      <div class="pacchetto-header">
+        <div class="pacchetto-dot" style="background:#b8975a;"></div>
+        <div class="pacchetto-name">M6 – Condivisione dei risultati</div>
+        <div class="pacchetto-req" id="req-p5">Opzionale</div>
+      </div>
+      <div class="lezione-list" id="list-p5"></div>
+    </div>
+  </div>
+
+  <!-- MESSAGGI DI VALIDAZIONE -->
+  <div class="validation-messages" id="val-messages"></div>
+
+  <!-- INVIO -->
+  <div class="section-block">
+    <div class="submit-area">
+      <button class="btn-submit" id="btn-submit" onclick="submitForm()">Invia iscrizione</button>
+      <p class="submit-note">Riceverai una conferma all'indirizzo email indicato</p>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-overlay" id="success">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Iscrizione inviata!</div>
+    <p class="success-msg" id="success-msg"></p>
+  </div>
+
+</main>
+
+<script>
+const MAX_POSTI = 30;
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycby1VOBmBVYtAZ7HkkSqYzDYqigSPTQqfM6Gbjhjjo-JwYpODx7acylsaW0fzbsElrkf/exec'; //
+
+// posti[pack_idx] = numero iscritti attuali (caricato da Sheets)
+let postiOccupati = {};
+
+const LEZIONI = {
+  p0: [
+    { data: '24 mar 2026', titolo: 'Condivisione degli obiettivi', docente: 'Mazzonetto / Draghetti / Plessi', ore: 6, luogo: 'in presenza' },
+    { data: '26 mar 2026', titolo: 'Il benessere organizzativo: dalla compliance al valore pubblico', docente: 'Silva / Draghetti', ore: 4, luogo: 'a distanza' },
+    { data: '27 mar 2026', titolo: 'La rete del Benessere organizzativo tra istituzioni e comunità', docente: 'Leonardo Draghetti', ore: 4, luogo: 'a distanza' },
+  ],
+  p1: [
+    { data: '30 mar 2026', titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Giulia Musumeci', ore: 4, luogo: 'a distanza' },
+    { data: '31 mar 2026', titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Paolo Casertelli', ore: 4, luogo: 'a distanza' },
+    { data: '2 apr 2026',  titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Antonella Buranello', ore: 4, luogo: 'a distanza' },
+    { data: '7 apr 2026',  titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
+    { data: '8 apr 2026',  titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Gaia Gottipavero', ore: 4, luogo: 'a distanza' },
+    { data: '9 apr 2026',  titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Giacchino Pagliaro', ore: 4, luogo: 'a distanza' },
+    { data: '13 apr 2026', titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Joey Weber', ore: 4, luogo: 'a distanza' },
+    { data: '14 apr 2026', titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Mazzonetto / Draghetti', ore: 4, luogo: 'a distanza' },
+  ],
+  p2: [
+    { data: '16 apr 2026', titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Isabella Sangiorgi', ore: 4, luogo: 'a distanza' },
+    { data: '20 apr 2026', titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Joey Weber', ore: 4, luogo: 'a distanza' },
+    { data: '21 apr 2026', titolo: 'Conoscere la nostra "macchina" biologica', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
+    { data: '23 apr 2026', titolo: 'Time hacking: gestire la propria batteria energetica', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
+    { data: '27 apr 2026', titolo: 'La gestione del conflitto interno ed esterno', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
+    { data: '28 apr 2026', titolo: 'Mi vedo, ti vedo, mi riconosco, ti riconosco', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
+    { data: '30 apr 2026', titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Loris Bonomassa', ore: 4, luogo: 'a distanza' },
+    { data: '4 mag 2026',  titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Giacchino Pagliaro', ore: 4, luogo: 'a distanza' },
+    { data: '5 mag 2026',  titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Antonella Buranello', ore: 4, luogo: 'a distanza' },
+  ],
+  p3: [
+    { data: '7 mag 2026',  titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
+    { data: '11 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
+    { data: '12 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Leonardo Draghetti', ore: 4, luogo: 'a distanza' },
+    { data: '14 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
+    { data: '18 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
+    { data: '19 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Gaia Gottipavero', ore: 4, luogo: 'a distanza' },
+    { data: '25 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Isabella Sangiorgi', ore: 4, luogo: 'a distanza' },
+    { data: '26 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Giulia Pierangeli', ore: 4, luogo: 'a distanza' },
+  ],
+  p4: [
+    { data: '28 mag 2026', titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
+    { data: '3 giu 2026',  titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
+    { data: '4 giu 2026',  titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Renato Mazzonetto', ore: 4, luogo: 'a distanza' },
+    { data: '5 giu 2026',  titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Isabella Sangiorgi', ore: 4, luogo: 'a distanza' },
+    { data: '8 giu 2026',  titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Joey Weber', ore: 4, luogo: 'a distanza' },
+    { data: '11 giu 2026', titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Renato Mazzonetto', ore: 4, luogo: 'a distanza' },
+  ],
+  p5: [
+    { data: '12 giu 2026', titolo: 'Condivisione dei risultati', docente: 'Mazzonetto / Draghetti', ore: 6, luogo: 'in presenza · Bologna' },
+  ],
+};
+
+const LABELS = { p0: 'M1', p1: 'M2', p2: 'M3', p3: 'M4', p4: 'M5', p5: 'M6' };
+const OPTIONAL_PACKS = ['p0', 'p5'];
+const REQUIRED_PACKS = ['p1', 'p2', 'p3', 'p4'];
+
+// Render lezioni
+function renderLezioni() {
+  Object.keys(LEZIONI).forEach(pack => {
+    const list = document.getElementById('list-' + pack);
+    if (!list) return;
+    list.innerHTML = '';
+    LEZIONI[pack].forEach((l, i) => {
+      const key = `${pack}_${i}`;
+      const occupati = postiOccupati[key] || 0;
+      const liberi = MAX_POSTI - occupati;
+      const isFull = liberi <= 0;
+      const isLow = !isFull && liberi <= 5;
+
+      let seatsBadgeClass = 'seats-ok';
+      let seatsText = `${liberi} posti`;
+      if (isFull) { seatsBadgeClass = 'seats-full'; seatsText = 'Esaurito'; }
+      else if (isLow) { seatsBadgeClass = 'seats-low'; seatsText = `Ultimi ${liberi}`; }
+
+      const id = key;
+      const item = document.createElement('label');
+      item.className = 'lezione-item' + (isFull ? ' full' : '');
+      item.setAttribute('for', id);
+      item.innerHTML = `
+        <input type="checkbox" id="${id}" data-pack="${pack}" data-ore="${l.ore}" data-key="${key}" ${isFull ? 'disabled' : ''}>
+        <div class="check-box"></div>
+        <div class="lezione-info">
+          <div class="lezione-data">${l.data} · ${l.luogo}${l.luogo === 'a distanza' ? ' · 9:30–13:30' : ''}</div>
+          <div class="lezione-titolo">${l.titolo}</div>
+          <div class="lezione-docente">${l.docente}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+          <span class="seats-badge ${seatsBadgeClass}">${seatsText}</span>
+          <div class="lezione-ore">${l.ore}h</div>
+        </div>
+      `;
+      if (!isFull) {
+        item.querySelector('input').addEventListener('change', function() {
+          if (this.checked) item.classList.add('selected');
+          else item.classList.remove('selected');
+          updateCounter();
+        });
+      }
+      list.appendChild(item);
+    });
+  });
+}
+
+// Carica disponibilità da Google Sheets
+async function loadDisponibilita() {
+  document.getElementById('loading-bar').classList.add('show');
+  try {
+    // In produzione: decommentare le righe seguenti e rimuovere la simulazione
+    // const res = await fetch(SHEET_URL + '?action=getSeats');
+    // const data = await res.json();
+    // postiOccupati = data.seats; // { "p0_0": 12, "p1_3": 30, ... }
+
+    // SIMULAZIONE per demo – rimuovere in produzione e usare il fetch sopra
+    await new Promise(r => setTimeout(r, 800));
+    postiOccupati = {
+      'p1_3': 30, // Barbara Costantini 7 apr – esaurita
+      'p2_2': 28, // Del Piano 21 apr – quasi esaurita
+      'p3_0': 29, // Costantini 7 mag – quasi esaurita
+    };
+    // FINE SIMULAZIONE
+
+    document.getElementById('loading-notice').classList.add('hide');
+  } catch(e) {
+    document.getElementById('loading-notice').textContent = '⚠️ Impossibile caricare la disponibilità. I posti potrebbero non essere aggiornati.';
+  } finally {
+    document.getElementById('loading-bar').classList.remove('show');
+  }
+  renderLezioni();
+}
+
+function getSelections() {
+  const result = { p0: [], p1: [], p2: [], p3: [], p4: [], p5: [] };
+  document.querySelectorAll('input[type=checkbox]:checked').forEach(cb => {
+    result[cb.dataset.pack].push(parseInt(cb.dataset.ore));
+  });
+  return result;
+}
+
+function getTotalOre(sel) {
+  return Object.values(sel).flat().reduce((a,b) => a+b, 0);
+}
+
+function updateCounter() {
+  const sel = getSelections();
+  const total = getTotalOre(sel);
+  const display = document.getElementById('ore-display');
+  const fill = document.getElementById('ore-fill');
+
+  display.textContent = total;
+  const pct = Math.min(100, Math.round(total / 24 * 100));
+  fill.style.width = pct + '%';
+
+  if (total >= 24) {
+    display.className = 'ore-number ok';
+    fill.className = 'ore-fill ok';
+  } else {
+    display.className = 'ore-number';
+    fill.className = 'ore-fill';
+  }
+
+  // breakdown per required packs only
+  ['p1','p2','p3','p4'].forEach(p => {
+    const ore = sel[p].reduce((a,b) => a+b, 0);
+    document.getElementById('b-' + p).textContent = LABELS[p] + ': ' + ore + 'h';
+    const req = document.getElementById('req-' + p);
+    if (sel[p].length > 0) {
+      req.textContent = '✓ ' + sel[p].length + ' sel.';
+      req.className = 'pacchetto-req ok';
+    } else {
+      req.textContent = 'Min. 1 lezione';
+      req.className = 'pacchetto-req';
+    }
+  });
+  // optional packs badge
+  ['p0','p5'].forEach(p => {
+    const req = document.getElementById('req-' + p);
+    if (!req) return;
+    const cnt = sel[p].length;
+    if (cnt > 0) {
+      req.textContent = '✓ ' + cnt + ' sel.';
+      req.className = 'pacchetto-req ok';
+    } else {
+      req.textContent = 'Opzionale';
+      req.className = 'pacchetto-req';
+    }
+  });
+}
+
+function validateForm() {
+  let errors = [];
+  let valid = true;
+
+  // Campi anagrafici
+  const nome = document.getElementById('nome').value.trim();
+  const cognome = document.getElementById('cognome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const cf = document.getElementById('cf').value.trim();
+  const ente = document.getElementById('ente').value.trim();
+
+  const showErr = (id, errId, show) => {
+    document.getElementById(id).classList.toggle('invalid', show);
+    document.getElementById(errId).classList.toggle('show', show);
+  };
+
+  showErr('nome', 'err-nome', !nome);
+  showErr('cognome', 'err-cognome', !cognome);
+  showErr('email', 'err-email', !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+  showErr('cf', 'err-cf', cf.length !== 16);
+  showErr('ente', 'err-ente', !ente);
+
+  if (!nome || !cognome || !ente) { errors.push('Compila tutti i campi anagrafici obbligatori.'); valid = false; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errors.push('Inserisci un indirizzo email valido.'); valid = false; }
+  if (cf.length !== 16) { errors.push('Il codice fiscale deve essere di 16 caratteri.'); valid = false; }
+
+  // Lezioni
+  const sel = getSelections();
+  const total = getTotalOre(sel);
+  const packNames = { p1: 'M2 – Mindfulness e benessere', p2: 'M3 – Capacità attentive', p3: 'M4 – Stress amministrativo', p4: 'M5 – Clima organizzativo' };
+
+  REQUIRED_PACKS.forEach(p => {
+    if (sel[p].length === 0) {
+      errors.push(`Seleziona almeno una lezione dal pacchetto <strong>${packNames[p]}</strong>.`);
+      valid = false;
+    }
+  });
+
+  if (total < 24) {
+    errors.push(`Hai selezionato <strong>${total} ore</strong>. Il minimo richiesto è <strong>24 ore</strong>.`);
+    valid = false;
+  }
+
+  const msgBox = document.getElementById('val-messages');
+  if (errors.length > 0) {
+    msgBox.innerHTML = errors.map(e => `<div class="val-item error"><span class="val-icon">⚠️</span><span>${e}</span></div>`).join('');
+    msgBox.className = 'validation-messages show';
+  } else {
+    msgBox.innerHTML = `<div class="val-item success"><span class="val-icon">✅</span><span>Tutti i requisiti sono soddisfatti. Puoi procedere con l'invio.</span></div>`;
+    msgBox.className = 'validation-messages show';
+  }
+
+  return { valid, nome, cognome, email, cf, ente, sel, total };
+}
+
+async function submitForm() {
+  const { valid, nome, cognome, email, cf, ente, sel, total } = validateForm();
+  if (!valid) {
+    document.getElementById('val-messages').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Verifica posti…';
+
+  // Build lezioni selezionate
+  const lezioniSel = [];
+  ['p0','p1','p2','p3','p4','p5'].forEach(pack => {
+    document.querySelectorAll(`input[data-pack="${pack}"]:checked`).forEach(cb => {
+      const idx = parseInt(cb.id.split('_')[1]);
+      const l = LEZIONI[pack][idx];
+      lezioniSel.push({ pacchetto: LABELS[pack], data: l.data, titolo: l.titolo, docente: l.docente, ore: l.ore, key: cb.dataset.key });
+    });
+  });
+
+  try {
+    // Verifica posti in tempo reale prima di salvare
+    // In produzione: decommentare le righe seguenti e rimuovere la simulazione
+    // const checkRes = await fetch(SHEET_URL + '?action=getSeats');
+    // const checkData = await checkRes.json();
+    // const freshSeats = checkData.seats;
+    // SIMULAZIONE:
+    await new Promise(r => setTimeout(r, 600));
+    const freshSeats = postiOccupati; // in produzione sostituire con freshSeats dal server
+    // FINE SIMULAZIONE
+
+    const esaurite = lezioniSel.filter(l => (freshSeats[l.key] || 0) >= MAX_POSTI);
+    if (esaurite.length > 0) {
+      const msgBox = document.getElementById('val-messages');
+      const nomi = esaurite.map(l => `<strong>${l.data} – ${l.docente}</strong>`).join(', ');
+      msgBox.innerHTML = `<div class="val-item error"><span class="val-icon">⚠️</span><span>Le seguenti lezioni si sono esaurite nel frattempo: ${nomi}. Deselezionale e scegline altre.</span></div>`;
+      msgBox.className = 'validation-messages show';
+      msgBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Aggiorna la UI con i nuovi posti
+      postiOccupati = freshSeats;
+      renderLezioni();
+      btn.disabled = false;
+      btn.textContent = 'Invia iscrizione';
+      return;
+    }
+
+    btn.textContent = 'Invio in corso…';
+
+    const payload = {
+      action: 'register',
+      nome, cognome, email, cf: cf.toUpperCase(), ente,
+      ore_totali: total,
+      lezioni: lezioniSel.map(({key, ...rest}) => rest)
+    };
+
+    // In produzione: decommentare le righe seguenti e rimuovere la simulazione
+    // const postRes = await fetch(SHEET_URL, {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(payload)
+    // });
+    // const postData = await postRes.json();
+    // if (!postData.success) throw new Error(postData.error || 'Errore sconosciuto');
+    // SIMULAZIONE per demo:
+    await new Promise(r => setTimeout(r, 1000));
+    console.log('Payload inviato:', JSON.stringify(payload, null, 2));
+    // FINE SIMULAZIONE
+
+    document.querySelectorAll('.section-block').forEach(b => b.style.display = 'none');
+    document.querySelector('.ore-counter').style.display = 'none';
+    document.querySelector('.validation-messages').style.display = 'none';
+
+    const s = document.getElementById('success');
+    document.getElementById('success-msg').innerHTML =
+      `Grazie <strong>${nome} ${cognome}</strong>! La tua iscrizione è stata registrata.<br>
+       Hai selezionato <strong>${total} ore</strong> di formazione.<br>
+       Riceverai una conferma a <strong>${email}</strong>.`;
+    s.className = 'success-overlay show';
+    s.scrollIntoView({ behavior: 'smooth' });
+
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = 'Invia iscrizione';
+    alert("Errore durante l'invio. Riprova o contatta l'organizzazione.");
+  }
+}
+
+// Init
+loadDisponibilita();
+</script>
+</body>
+</html>
