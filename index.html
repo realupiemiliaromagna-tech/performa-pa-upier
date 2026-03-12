@@ -597,7 +597,7 @@
       <div class="pacchetto-header">
         <div class="pacchetto-dot" style="background:#4a6fa5;"></div>
         <div class="pacchetto-name">M1 – Condivisione degli obiettivi</div>
-        <div class="pacchetto-req" id="req-p0">Opzionale</div>
+        <div class="pacchetto-req" id="req-p0">Consigliato</div>
       </div>
       <div class="lezione-list" id="list-p0"></div>
     </div>
@@ -682,53 +682,55 @@ let postiOccupati = {};
 
 const LEZIONI = {
   p0: [
-    { data: '24 mar 2026', titolo: 'Condivisione degli obiettivi', docente: 'Mazzonetto / Draghetti / Plessi', ore: 6, luogo: 'in presenza' },
-    { data: '26 mar 2026', titolo: 'Il benessere organizzativo: dalla compliance al valore pubblico', docente: 'Silva / Draghetti', ore: 4, luogo: 'a distanza' },
-    { data: '27 mar 2026', titolo: 'La rete del Benessere organizzativo tra istituzioni e comunità', docente: 'Leonardo Draghetti', ore: 4, luogo: 'a distanza' },
+    { data: '24 mar 2026', titolo: 'Condivisione, introduzione teorico-pratica', docente: 'Renato Mazzonetto, Leonardo Draghetti, Luana Plessi', ore: 6, luogo: 'in presenza', maxPosti: 100 },
+    { data: '26 mar 2026', titolo: 'La rete del Benessere organizzativo tra istituzioni e comunit\u00e0', docente: 'Leonardo Draghetti', ore: 4, luogo: 'a distanza', maxPosti: 100 },
+    { data: '27 mar 2026', titolo: 'Il benessere organizzativo: dalla compliance al valore pubblico', docente: 'Vittorio Silva e Leonardo Draghetti', ore: 4, luogo: 'a distanza', maxPosti: 100 },
   ],
   p1: [
-    { data: '30 mar 2026', titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Giulia Musumeci', ore: 4, luogo: 'a distanza' },
-    { data: '31 mar 2026', titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Paolo Casertelli', ore: 4, luogo: 'a distanza' },
-    { data: '2 apr 2026',  titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Antonella Buranello', ore: 4, luogo: 'a distanza' },
-    { data: '7 apr 2026',  titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
-    { data: '8 apr 2026',  titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Gaia Gottipavero', ore: 4, luogo: 'a distanza' },
-    { data: '9 apr 2026',  titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Giacchino Pagliaro', ore: 4, luogo: 'a distanza' },
-    { data: '13 apr 2026', titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Joey Weber', ore: 4, luogo: 'a distanza' },
-    { data: '14 apr 2026', titolo: 'Principi della mindfulness – stress, attenzione, collaborazione', docente: 'Mazzonetto / Draghetti', ore: 4, luogo: 'a distanza' },
+    { data: '31 mar 2026', titolo: 'Sonno, salute, performance e longev\u00e0', docente: 'Loris Bonamassa', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '2 apr 2026',  titolo: 'Trasmettere i principi della mindfulness. Connessioni della mindfulness con stress, attenzione, collaborazione', docente: 'Antonella Buranello', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '7 apr 2026',  titolo: 'Benessere nelle relazioni: "coltivatori diretti" ... di umanit\u00e0', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza', maxPosti: 20 },
+    { data: '8 apr 2026',  titolo: 'Trasmettere i principi della mindfulness. Connessioni della mindfulness con stress, attenzione, collaborazione', docente: 'Gaia Gottipavero', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '9 apr 2026',  titolo: 'Trasmettere i principi della mindfulness. Connessioni della mindfulness con stress, attenzione, collaborazione', docente: 'Giacchino Pagliaro', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '13 apr 2026', titolo: 'Trasmettere i principi della mindfulness. Connessioni della mindfulness con stress, attenzione, collaborazione', docente: 'Joey Weber e Renato Mazzonetto', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '15 apr 2026', titolo: 'Trasmettere i principi della mindfulness. Connessioni della mindfulness con stress, attenzione, collaborazione', docente: 'Giulia Musumeci', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '16 apr 2026', titolo: 'Trasmettere i principi della mindfulness. Connessioni della mindfulness con stress, attenzione, collaborazione', docente: 'Renato Mazzonetto e Leonardo Draghetti', ore: 4, luogo: 'a distanza', maxPosti: 30 },
   ],
   p2: [
-    { data: '16 apr 2026', titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Isabella Sangiorgi', ore: 4, luogo: 'a distanza' },
-    { data: '20 apr 2026', titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Joey Weber', ore: 4, luogo: 'a distanza' },
-    { data: '21 apr 2026', titolo: 'Conoscere la nostra "macchina" biologica', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
-    { data: '23 apr 2026', titolo: 'Time hacking: gestire la propria batteria energetica', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
-    { data: '27 apr 2026', titolo: 'La gestione del conflitto interno ed esterno', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
-    { data: '28 apr 2026', titolo: 'Mi vedo, ti vedo, mi riconosco, ti riconosco', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
-    { data: '30 apr 2026', titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Loris Bonomassa', ore: 4, luogo: 'a distanza' },
-    { data: '4 mag 2026',  titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Giacchino Pagliaro', ore: 4, luogo: 'a distanza' },
-    { data: '5 mag 2026',  titolo: 'Concentrazione consapevole, performance, gestione del multitasking', docente: 'Antonella Buranello', ore: 4, luogo: 'a distanza' },
+    { data: '17 apr 2026', titolo: "Allenare l'attenzione nel lavoro pubblico: strumenti pratici per gestire concentrazione, multitasking ed energia mentale", docente: 'Isabella Sangiorgi', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '20 apr 2026', titolo: 'Potenziare la concentrazione e ridurre le distrazioni. Concentrazione consapevole, performance, gestione del multitasking', docente: 'Joey Weber e Renato Mazzonetto', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '21 apr 2026', titolo: 'Come funzionano i nostri meccanismi "interiori"', docente: 'Emmanuele Del Piano e Anna Piacentini', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '23 apr 2026', titolo: 'Time hacking, gestire tempo ed emozioni in un colpo solo', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '27 apr 2026', titolo: 'La gestione del conflitto interno ed esterno', docente: 'Emmanuele Del Piano e Anna Piacentini', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '28 apr 2026', titolo: 'La fiducia come acceleratore di benessere', docente: 'Emmanuele Del Piano e Laura Simioli', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '30 apr 2026', titolo: 'Sonno, salute, performance e longev\u00e0', docente: 'Loris Bonamassa', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '4 mag 2026',  titolo: 'Potenziare la concentrazione e ridurre le distrazioni. Concentrazione consapevole, performance, gestione del multitasking', docente: 'Antonella Buranello', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '5 mag 2026',  titolo: 'Potenziare la concentrazione e ridurre le distrazioni. Concentrazione consapevole, performance, gestione del multitasking', docente: 'Giacchino Pagliaro', ore: 4, luogo: 'a distanza', maxPosti: 30 },
   ],
   p3: [
-    { data: '7 mag 2026',  titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
-    { data: '11 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
-    { data: '12 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Leonardo Draghetti', ore: 4, luogo: 'a distanza' },
-    { data: '14 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
-    { data: '18 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
-    { data: '19 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Gaia Gottipavero', ore: 4, luogo: 'a distanza' },
-    { data: '25 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Isabella Sangiorgi', ore: 4, luogo: 'a distanza' },
-    { data: '26 mag 2026', titolo: 'Stress amministrativo, resilienza emotiva, routine sostenibili', docente: 'Giulia Pierangeli', ore: 4, luogo: 'a distanza' },
+    { data: '7 mag 2026',  titolo: 'Fornire strumenti per gestire lo stress amministrativo e migliorare la resilienza emotiva. Cause dello stress, meditazioni guidate, respirazione consapevole, costruzione di routine sostenibili', docente: 'Leonardo Draghetti', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '11 mag 2026', titolo: "Governare l'invisibile. Capacit\u00e0 attentive, visione introspettiva e trame comunitarie per un nuovo benessere organizzativo ecosistemico", docente: 'Cinzia Marigo', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '12 mag 2026', titolo: 'Benessere nelle relazioni: "coltivatori diretti" ... di umanit\u00e0', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza', maxPosti: 20 },
+    { data: '14 mag 2026', titolo: 'La consapevolezza come pilastro delle relazioni', docente: 'Raffaella Pagnanini', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '18 mag 2026', titolo: 'La consapevolezza come pilastro delle relazioni', docente: 'Luca Bodini', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '19 mag 2026', titolo: 'Fornire strumenti per gestire lo stress amministrativo e migliorare la resilienza emotiva. Cause dello stress, meditazioni guidate, respirazione consapevole, costruzione di routine sostenibili', docente: 'Gaia Gottipavero', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '25 mag 2026', titolo: 'Accettazione e Resilienza nella Mindfulness & Compassion Training, il Coraggio del Cuore', docente: 'Renato Mazzonetto e Anna Gallo', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '26 mag 2026', titolo: 'Accettazione e Resilienza nella Mindfulness & Compassion Training, il Coraggio del Cuore', docente: 'Renato Mazzonetto e Anna Gallo', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '28 mag 2026', titolo: 'Benessere nelle relazioni: "coltivatori diretti" ... di umanit\u00e0', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza', maxPosti: 20 },
   ],
   p4: [
-    { data: '28 mag 2026', titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Barbara Costantini', ore: 4, luogo: 'a distanza' },
-    { data: '3 giu 2026',  titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Emmanuele Del Piano', ore: 4, luogo: 'a distanza' },
-    { data: '4 giu 2026',  titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Renato Mazzonetto', ore: 4, luogo: 'a distanza' },
-    { data: '5 giu 2026',  titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Isabella Sangiorgi', ore: 4, luogo: 'a distanza' },
-    { data: '8 giu 2026',  titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Joey Weber', ore: 4, luogo: 'a distanza' },
-    { data: '11 giu 2026', titolo: 'Equanimità, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Renato Mazzonetto', ore: 4, luogo: 'a distanza' },
+    { data: '3 giu 2026',  titolo: 'Promuovere un ambiente collaborativo. Equanimity, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Giulia Pierangeli', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '4 giu 2026',  titolo: 'Promuovere un ambiente collaborativo. Equanimity, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Renato Mazzonetto', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '5 giu 2026',  titolo: "Dal conflitto all'armonia: migliorare il clima organizzativo attraverso relazioni consapevoli", docente: 'Isabella Sangiorgi', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '8 giu 2026',  titolo: 'Promuovere un ambiente collaborativo. Equanimity, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Joey Weber e Renato Mazzonetto', ore: 4, luogo: 'a distanza', maxPosti: 30 },
+    { data: '11 giu 2026', titolo: 'Promuovere un ambiente collaborativo. Equanimity, empatia, gestione conflitti, costruzione fiducia, team building', docente: 'Renato Mazzonetto e Antonio Giraldi', ore: 4, luogo: 'a distanza', maxPosti: 30 },
   ],
   p5: [
-    { data: '12 giu 2026', titolo: 'Condivisione dei risultati', docente: 'Mazzonetto / Draghetti', ore: 6, luogo: 'in presenza · Bologna' },
+    { data: '12 giu 2026', titolo: 'Condivisione della valutazione e dello sviluppo', docente: 'Renato Mazzonetto, Leonardo Draghetti, Luana Plessi', ore: 6, luogo: 'in presenza', maxPosti: 100 },
   ],
 };
+
+const LABELS = 
 
 const LABELS = { p0: 'M1', p1: 'M2', p2: 'M3', p3: 'M4', p4: 'M5', p5: 'M6' };
 const OPTIONAL_PACKS = ['p0', 'p5'];
@@ -743,21 +745,23 @@ function renderLezioni() {
     LEZIONI[pack].forEach((l, i) => {
       const key = `${pack}_${i}`;
       const occupati = postiOccupati[key] || 0;
-      const liberi = MAX_POSTI - occupati;
+      const maxPosti = l.maxPosti || MAX_POSTI;
+      const liberi = maxPosti - occupati;
       const isFull = liberi <= 0;
       const isLow = !isFull && liberi <= 5;
+      const maxLabel = maxPosti < 100 ? maxPosti + ' posti max' : '';
 
       let seatsBadgeClass = 'seats-ok';
-      let seatsText = `${liberi} posti`;
+      let seatsText = liberi + ' posti';
       if (isFull) { seatsBadgeClass = 'seats-full'; seatsText = 'Esaurito'; }
-      else if (isLow) { seatsBadgeClass = 'seats-low'; seatsText = `Ultimi ${liberi}`; }
+      else if (isLow) { seatsBadgeClass = 'seats-low'; seatsText = 'Ultimi ' + liberi; }
 
       const id = key;
       const item = document.createElement('label');
       item.className = 'lezione-item' + (isFull ? ' full' : '');
       item.setAttribute('for', id);
       item.innerHTML = `
-        <input type="checkbox" id="${id}" data-pack="${pack}" data-ore="${l.ore}" data-key="${key}" ${isFull ? 'disabled' : ''}>
+        <input type="checkbox" id="${id}" data-pack="${pack}" data-ore="${l.ore}" data-key="${key}" data-maxposti="${maxPosti}" ${isFull ? 'disabled' : ''}>
         <div class="check-box"></div>
         <div class="lezione-info">
           <div class="lezione-data">${l.data} · ${l.luogo}${l.luogo === 'a distanza' ? ' · 9:30–13:30' : ''}</div>
@@ -871,7 +875,7 @@ function updateCounter() {
       req.textContent = '✓ ' + cnt + ' sel.';
       req.className = 'pacchetto-req ok';
     } else {
-      req.textContent = 'Opzionale';
+      req.textContent = p === 'p0' ? 'Consigliato' : 'Opzionale';
       req.className = 'pacchetto-req';
     }
   });
@@ -949,7 +953,7 @@ async function submitForm() {
     document.querySelectorAll(`input[data-pack="${pack}"]:checked`).forEach(cb => {
       const idx = parseInt(cb.id.split('_')[1]);
       const l = LEZIONI[pack][idx];
-      lezioniSel.push({ pacchetto: LABELS[pack], data: l.data, titolo: l.titolo, docente: l.docente, ore: l.ore, key: cb.dataset.key });
+      lezioniSel.push({ pacchetto: LABELS[pack], data: l.data, titolo: l.titolo, docente: l.docente, ore: l.ore, key: cb.dataset.key, maxPosti: l.maxPosti || MAX_POSTI });
     });
   });
 
