@@ -787,22 +787,24 @@ function renderLezioni() {
 
 // Carica disponibilità da Google Sheets tramite JSONP (evita CORS)
 function loadDisponibilita() {
+  // Mostra subito le lezioni con posti a 0, poi aggiorna quando arriva risposta
+  renderLezioni();
+
   document.getElementById('loading-bar').classList.add('show');
 
-  const callbackName = 'seatsCallback_' + Date.now();
-  const script = document.createElement('script');
+  var callbackName = 'seatsCallback_' + Date.now();
+  var scriptTag = document.createElement('script');
 
-  const timer = setTimeout(() => {
+  var timer = setTimeout(function() {
     cleanup();
-    document.getElementById('loading-notice').textContent = '⚠️ Impossibile caricare la disponibilità. I posti potrebbero non essere aggiornati.';
+    document.getElementById('loading-notice').textContent = '⚠️ Disponibilità posti non aggiornata in tempo reale.';
     document.getElementById('loading-bar').classList.remove('show');
-    renderLezioni();
   }, 8000);
 
   function cleanup() {
     clearTimeout(timer);
     delete window[callbackName];
-    if (script.parentNode) script.parentNode.removeChild(script);
+    if (scriptTag.parentNode) scriptTag.parentNode.removeChild(scriptTag);
   }
 
   window[callbackName] = function(data) {
@@ -810,17 +812,16 @@ function loadDisponibilita() {
     postiOccupati = (data && data.seats) || {};
     document.getElementById('loading-notice').classList.add('hide');
     document.getElementById('loading-bar').classList.remove('show');
-    renderLezioni();
+    renderLezioni(); // ri-renderizza con i posti reali
   };
 
-  script.src = SHEET_URL + '?action=getSeats&callback=' + callbackName;
-  script.onerror = function() {
+  scriptTag.src = SHEET_URL + '?action=getSeats&callback=' + callbackName;
+  scriptTag.onerror = function() {
     cleanup();
-    document.getElementById('loading-notice').textContent = '⚠️ Impossibile caricare la disponibilità.';
+    document.getElementById('loading-notice').textContent = '⚠️ Impossibile caricare la disponibilità in tempo reale.';
     document.getElementById('loading-bar').classList.remove('show');
-    renderLezioni();
   };
-  document.head.appendChild(script);
+  document.head.appendChild(scriptTag);
 }
 
 function getSelections() {
@@ -986,10 +987,10 @@ async function submitForm() {
     };
 
     // Invia i dati tramite JSONP (unico metodo cross-origin senza preflight)
-    await new Promise((resolve, reject) => {
-      const cbName = 'registerCallback_' + Date.now();
-      const s = document.createElement('script');
-      const t = setTimeout(() => {
+    await new Promise(function(resolve, reject) {
+      var cbName = 'registerCallback_' + Date.now();
+      var s = document.createElement('script');
+      var t = setTimeout(function() {
         delete window[cbName];
         if (s.parentNode) s.parentNode.removeChild(s);
         reject(new Error('Timeout'));
@@ -1007,7 +1008,7 @@ async function submitForm() {
         if (s.parentNode) s.parentNode.removeChild(s);
         reject(new Error('Errore di rete'));
       };
-      const encoded = encodeURIComponent(JSON.stringify(payload));
+      var encoded = encodeURIComponent(JSON.stringify(payload));
       s.src = SHEET_URL + '?callback=' + cbName + '&payload=' + encoded;
       document.head.appendChild(s);
     });
